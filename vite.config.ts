@@ -6,10 +6,10 @@ export default defineConfig({
   plugins: [react()],
   base: './',
   build: {
-    outDir: 'dist-front',
+    outDir: 'dist-frontend',
     emptyOutDir: true,
-    rollupOptions: {
-      external: ['vite.config.js'] // 排除配置文件
-    }
+    sourcemap: false,  // 禁用 sourcemap 以提高构建性能
+    copyPublicDir: true,  // 禁用复制 public 目录
+    target: 'esnext',  // 构建目标为现代浏览器
   },
 })

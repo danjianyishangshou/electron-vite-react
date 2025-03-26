@@ -15,7 +15,7 @@ const createWindow = () => {
             webSecurity: true
         },
     });
-    const indexPath = node_path_1.default.resolve(electron_1.app.getAppPath(), 'dist-front/index.html');
+    const indexPath = node_path_1.default.resolve(electron_1.app.getAppPath(), 'dist-frontend/index.html');
     win.loadFile(indexPath);
 };
 electron_1.app.on('ready', createWindow);

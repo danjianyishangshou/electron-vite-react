@@ -1,0 +1,27 @@
+{
+    "appId": "com.electron.app",
+    "productName": "Electron React App",
+    "files": [
+        "dist-electron/**/*",
+        "dist-front/**/*"
+    ],
+    "icon": "./desktopIcon.png",
+    "directories": {
+        "output": "release"
+    },
+    "mac": {
+        "target": "dmg"
+    },
+    "linux": {
+        "target": [
+            "tar.gz"
+        ],
+        "category": "Utility"
+    },
+    "win": {
+        "target": [
+            "portable",
+            "nsis"
+        ]
+    }
+}

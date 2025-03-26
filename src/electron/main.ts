@@ -11,7 +11,7 @@ const createWindow = () => {
         },
     })
  
-    const indexPath = path.resolve(app.getAppPath(), 'dist-front/index.html');
+    const indexPath = path.resolve(app.getAppPath(), 'dist-frontend/index.html');
 
     win.loadFile(indexPath)
 }
