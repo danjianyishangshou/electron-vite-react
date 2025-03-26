@@ -8,5 +8,8 @@ export default defineConfig({
   build: {
     outDir: 'dist-front',
     emptyOutDir: true,
+    rollupOptions: {
+      external: ['vite.config.js'] // 排除配置文件
+    }
   },
 })

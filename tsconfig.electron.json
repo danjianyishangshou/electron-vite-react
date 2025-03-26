@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "target": "ESNext",
+        "module": "NodeNext",
+        "outDir": "./dist-electron",
+        "rootDir": "src/electron",
+        "skipLibCheck": true
+    },
+    "include": [
+        "src/electron"
+    ],
+    "exclude": [
+        "vite.config.*"
+    ]
+}

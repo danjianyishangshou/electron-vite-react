@@ -5,12 +5,12 @@
   "type": "commonjs",
   "main": "dist-electron/main.js",
   "scripts": {
-    "dev": "electron .",
+    "dev": "npm run build && electron .",
     "dev:front": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "transpile:electron": "tsc --project src/electron/tsconfig.json"
+    "transpile:electron": "tsc --project tsconfig.electron.json"
   },
   "dependencies": {
     "react": "^18.2.0",
