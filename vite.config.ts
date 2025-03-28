@@ -12,4 +12,8 @@ export default defineConfig({
     copyPublicDir: true,  // 禁用复制 public 目录
     target: 'esnext',  // 构建目标为现代浏览器
   },
+  server: {
+    port: 5123,
+    strictPort: true
+  } 
 })
