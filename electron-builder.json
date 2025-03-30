@@ -2,13 +2,14 @@
     "appId": "com.electron.app",
     "productName": "Electron React App",
     "extraResources": [
-        "dist-electron/preload.cjs"
+        "dist-electron/preload.cjs",
+        "src/assets/**/*"
     ],
     "files": [
         "dist-electron/**/*",
         "dist-front/**/*"
     ],
-    "icon": "./desktopIcon.png",
+    "icon": "src/assets/images/desktopIcon.png",
     "directories": {
         "output": "release"
     },

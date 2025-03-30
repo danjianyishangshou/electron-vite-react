@@ -9,11 +9,11 @@
   "license": "MIT",
   "scripts": {
     "dev": "cross-env NODE_ENV=development npm-run-all --parallel dev:front dev:electron",
-    "dev:prod": "cross-env NODE_ENV=production npm-run-all --parallel dev:front dev:electron-prod",
+    "dev:prod": "cross-env NODE_ENV=production npm-run-all --parallel dev:front dev:electron",
     "dev:front": "vite --mode $NODE_ENV",
     "dev:electron": "npm run transpile:electron && electron .",
     "build": "cross-env NODE_ENV=production npm-run-all --parallel build:front transpile:electron",
-    "build:dev": "cross-env NODE_ENV=development npm-run-all --parallel build:front-dev transpile:electron",
+    "build:test": "cross-env NODE_ENV=test npm-run-all --parallel build:front transpile:electron",
     "build:front": "tsc -b && vite build --mode $NODE_ENV",
     "lint": "eslint .",
     "clean": "rm -rf dist dist-electron",
@@ -24,14 +24,15 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "preview": "vite preview",
+    "preview:electron": "electron .",
     "transpile:electron": "cross-env NODE_ENV=${NODE_ENV:-development} tsc --project tsconfig.electron.json",
     "dist:base": "electron-builder --config electron-builder.json",
     "dist:mac": "npm run build && npm run dist:base --mac --universal --arm64",
-    "dist:mac:dev": "npm run build:dev && e npm run dist:base --mac --universal --arm64",
+    "dist:mac:test": "npm run build:test && e npm run dist:base --mac --universal --arm64",
     "dist:win": "npm run build && e npm run dist:base --win --x64",
-    "dist:win:dev": "npm run build:dev && e npm run dist:base --win --x64",
+    "dist:win:test": "npm run build:test && e npm run dist:base --win --x64",
     "dist:linux": "npm run build && e npm run dist:base --linux --x64",
-    "dist:linux:dev": "npm run build:dev && e npm run dist:base --linux --x64"
+    "dist:linux:test": "npm run build:test && e npm run dist:base --linux --x64"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -53,8 +54,10 @@
     "globals": "^15.11.0",
     "npm-run-all": "^4.1.5",
     "os-utils": "^0.0.14",
+    "recharts": "^2.15.1",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.11.0",
+    "url": "^0.11.4",
     "vite": "^5.4.10"
   },
   "build": "./electron-builder.json",

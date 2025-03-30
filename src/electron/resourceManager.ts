@@ -2,27 +2,24 @@ import osUtils from 'os-utils';
 import os from 'node:os'
 import fs from 'node:fs'
 import path from 'node:path'
+import { BrowserWindow } from 'electron';
+import { ipcWebContentsSend } from './util';
 
 const POLLING_INTERVAL = 500; // 轮询间隔时间（毫秒）
 /**
  * 轮询获取动态资源
  */
-export function pollResource() {
-    setInterval(async() => {
-       const cpuUsage = await getCpuUsage()
-       const ramUsage = getRamUsage()
-       const storageUsage = getStorageUsage()
-    //    console.table({
-    //     cpuUsage: `CPU 使用率: ${(cpuUsage * 100).toFixed(2)} %`,
-    //     ramUsage: `内存使用率: ${(ramUsage * 100).toFixed(2)} %`,
-    //     totalStorage: `硬盘总容量: ${storageUsage.total} GB`,
-    //     storageUsage: `硬盘使用率: ${(storageUsage.usage * 100).toFixed(2)} %`
-    //    });
-    return {
-        cpuUsage,
-        ramUsage,
-        storageUsage
-    }
+export function pollResource(mainWindow: BrowserWindow) {
+    setInterval(async () => {
+        const cpuUsage = await getCpuUsage()
+        const ramUsage = getRamUsage()
+        const storageUsage = getStorageUsage()
+        ipcWebContentsSend('statistics', mainWindow.webContents, {
+            cpuUsage,
+            ramUsage,
+            storageUsage: storageUsage.usage
+        })
+
     }, POLLING_INTERVAL)
 }
 
@@ -47,21 +44,21 @@ export function getStaticData() {
  * 获取 CPU 使用率
  * @returns 
  */
-function getCpuUsage():Promise<number> {
+function getCpuUsage(): Promise<number> {
     return new Promise((resolve) => osUtils.cpuUsage(resolve))
 }
 /**
  * 获取内存使用率
  * @returns 
  */
-function getRamUsage():number {
+function getRamUsage(): number {
     return 1 - osUtils.freememPercentage()
 }
 /**
  * 获取硬盘使用率
  * @returns 
  */
-function getStorageUsage():{ total : number, usage : number } {
+function getStorageUsage(): { total: number, usage: number } {
     // 获取根目录的文件系统状态信息
     const stats = fs.statfsSync(process.platform === 'win32' ? 'C:\\' : path.sep)
     // 计算总存储空间（单位：字节）
