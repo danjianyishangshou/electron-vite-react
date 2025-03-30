@@ -31,7 +31,7 @@ export function getStaticData() {
     // 获取cpus数量
     const cpuCount = os.cpus().length
     // 获取内存总量
-    const totalMemoryGB = Math.floor(os.totalmem() / 1024)
+    const totalMemoryGB = Math.floor(os.totalmem() / 1024 / 1000_000)
     return {
         totalStorage,
         cpuModel,
