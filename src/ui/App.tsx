@@ -1,11 +1,11 @@
-import { useEffect, useMemo, useState } from "react"
-import "./App.css"
-import { useStatistics } from "./hooks/useStatistics"
-import { Chart } from "./components/Chart"
+import { useEffect, useMemo, useState } from 'react'
+import './App.css'
+import { useStatistics } from './hooks/useStatistics'
+import { Chart } from './components/Chart'
 
 function App() {
   const staticData = useStaticData()
-  const [activeView, setActiveView] = useState<TSystem.View>("CPU")
+  const [activeView, setActiveView] = useState<TSystem.View>('CPU')
   const statistics = useStatistics(10)
   const cpuUsages = useMemo(
     () => statistics.map((stat) => stat.cpuUsage),
@@ -21,11 +21,11 @@ function App() {
   )
   const activeUsage = useMemo(() => {
     switch (activeView) {
-      case "CPU":
+      case 'CPU':
         return cpuUsages
-      case "RAM":
+      case 'RAM':
         return ramUsages
-      case "STORAGE":
+      case 'STORAGE':
         return storageUsages
     }
   }, [activeView, cpuUsages, ramUsages, storageUsages])
@@ -41,24 +41,24 @@ function App() {
       <div className="main">
         <div>
           <SelectOption
-            onClick={() => setActiveView("CPU")}
+            onClick={() => setActiveView('CPU')}
             title="CPU"
             view="CPU"
-            subTitle={staticData?.cpuModel ?? ""}
+            subTitle={staticData?.cpuModel ?? ''}
             data={cpuUsages}
           />
           <SelectOption
-            onClick={() => setActiveView("RAM")}
+            onClick={() => setActiveView('RAM')}
             title="RAM"
             view="RAM"
-            subTitle={(staticData?.totalMemoryGB.toString() ?? "") + " GB"}
+            subTitle={(staticData?.totalMemoryGB.toString() ?? '') + ' GB'}
             data={ramUsages}
           />
           <SelectOption
-            onClick={() => setActiveView("STORAGE")}
+            onClick={() => setActiveView('STORAGE')}
             title="STORAGE"
             view="STORAGE"
-            subTitle={(staticData?.totalStorage.toString() ?? "") + " GB"}
+            subTitle={(staticData?.totalStorage.toString() ?? '') + ' GB'}
             data={storageUsages}
           />
         </div>
@@ -98,15 +98,15 @@ function Header() {
     <header>
       <button
         id="close"
-        onClick={() => window.electron.sendFrameAction("CLOSE")}
+        onClick={() => window.electron.sendFrameAction('CLOSE')}
       />
       <button
         id="minimize"
-        onClick={() => window.electron.sendFrameAction("MINIMIZE")}
+        onClick={() => window.electron.sendFrameAction('MINIMIZE')}
       />
       <button
         id="maximize"
-        onClick={() => window.electron.sendFrameAction("MAXIMIZE")}
+        onClick={() => window.electron.sendFrameAction('MAXIMIZE')}
       />
     </header>
   )

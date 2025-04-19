@@ -1,15 +1,12 @@
 {
     "appId": "com.electron.app",
-    "productName": "Electron React App",
-    "extraResources": [
-        "dist-electron/preload.cjs",
-        "src/assets/**/*"
-    ],
-    "files": [
-        "dist-electron/**/*",
-        "dist-front/**/*"
-    ],
-    "icon": "src/assets/images/desktopIcon.png",
+    "productName": "OS-Manager",
+    "files": ["dist-electron", "dist-frontend"],
+    "extraResources": ["dist-electron/preload.cjs","src/assets/**"],
+    "icon": "./src/assets/icons/desktopIcon.png",
+    "extraMetadata": {
+        "BUILD": "true"
+    },
     "directories": {
         "output": "release"
     },

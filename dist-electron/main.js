@@ -21,12 +21,12 @@ const createWindow = () => {
             webSecurity: true,
         },
     });
-    if ((0, util_1.isDev)()) {
+    if ((0, util_1.ISURL)()) {
         mainWindow.loadURL('http://localhost:5123');
-        console.log('---> delevopment <---');
+        console.log('---> isUrl <---' + process.env.NODE_ENV);
     }
     else {
-        console.log('---> production --->' + (process.env.NODE_ENV || 'build'));
+        console.log('---> isPath --->' + (process.env.NODE_ENV || 'build'));
         mainWindow.loadFile((0, pathResolver_1.getUIPath)());
     }
     (0, resourceManager_1.pollResource)(mainWindow);
@@ -68,8 +68,9 @@ function handleCloseEvents(mainWindow) {
         e.preventDefault();
         // 隐藏窗口而不是退出应用
         mainWindow.hide();
-        if (electron_1.app.dock) { // 检查是否存在 Dock 对象（macOS 特殊处理）
-            // 隐藏 macOS 的 Dock 图标 
+        if (electron_1.app.dock) {
+            // 检查是否存在 Dock 对象（macOS 特殊处理）
+            // 隐藏 macOS 的 Dock 图标
             electron_1.app.dock.hide();
         }
     });
